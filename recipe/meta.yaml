@@ -18,12 +18,11 @@ build:
 requirements:
   host:
     - python
-    - hatchling
-    - hatch-requirements-txt
-    - hatch-vcs
     - pip
     - setuptools
     - wheel
+    - hatchling
+    - hatch-vcs
   run:
     - python
     - cachecontrol-with-filecache >=0.12.9
