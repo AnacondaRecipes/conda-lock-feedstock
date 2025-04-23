@@ -1,3 +1,4 @@
 channels:
   - https://staging.continuum.io/prefect/fs/ensureconda-feedstock/pr4/8f572f5
   - https://staging.continuum.io/prefect/fs/keyring-feedstock/pr13/0d445e7
+  - https://staging.continuum.io/prefect/fs/crashtest-feedstock/pr4/027f739
