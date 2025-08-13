@@ -1,16 +1,16 @@
-{% set version = "3.0.0" %}
+{% set version = "3.0.4" %}
 
 package:
   name: conda-lock
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/c/conda-lock/conda_lock-{{ version }}.tar.gz
-  sha256: 2ec53330374060f7a5d66c615132706a154b349fa8c5811935640b7049fc9840
+  url: https://pypi.org/packages/source/c/conda-lock/conda_lock-{{ version }}.tar.gz
+  sha256: 7ba6f8067834b3aae8662ed6316c5f15def431f129ddf423f7957c6181523db6
 
 build:
   number: 0
-  skip: True  # [py<39]
+  skip: true  # [py<39]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
     - conda-lock = conda_lock:main
@@ -38,7 +38,7 @@ requirements:
     - setuptools
     - tomli >=2.0.1,<3.0.0  # [py<311]
     - tomlkit >=0.11.4,<1.0.0
-    - typing_extensions
+    - typing_extensions >=4.6.1
     - boltons >=23.0.0
     - charset-normalizer
     - zstandard >=0.15
@@ -52,11 +52,14 @@ requirements:
     - requests-toolbelt >=1.0.0,<2.0.0
     - shellingham >=1.5,<2.0
     - trove-classifiers >=2022.5.19
-    - xattr >=1.0.0,<2.0.0  # [osx]
+    - xattr >=1.0.0,<2.0.0  # [darwin]
     - cachecontrol-with-filecache >=0.14.0,<0.15.0
     - crashtest >=0.4.1,<0.5.0
     - keyring >=25.1.0,<26.0.0
     - virtualenv >=20.26.6,<21.0.0
+    - filelock
+    - cachecontrol >=0.14.0,<0.15.0
+    - ruamel_yaml
 
 test:
   imports:
