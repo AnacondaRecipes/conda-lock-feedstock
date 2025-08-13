@@ -52,7 +52,7 @@ requirements:
     - requests-toolbelt >=1.0.0,<2.0.0
     - shellingham >=1.5,<2.0
     - trove-classifiers >=2022.5.19
-    - xattr >=1.0.0,<2.0.0  # [darwin]
+    - xattr >=1.0.0,<2.0.0  # [osx]
     - cachecontrol-with-filecache >=0.14.0,<0.15.0
     - crashtest >=0.4.1,<0.5.0
     - keyring >=25.1.0,<26.0.0
