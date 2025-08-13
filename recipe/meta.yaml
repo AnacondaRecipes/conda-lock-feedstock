@@ -58,8 +58,6 @@ requirements:
     - keyring >=25.1.0,<26.0.0
     - virtualenv >=20.26.6,<21.0.0
     - filelock
-    - cachecontrol >=0.14.0,<0.15.0
-    - ruamel_yaml
 
 test:
   imports:
