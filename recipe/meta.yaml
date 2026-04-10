@@ -1,15 +1,16 @@
+{% set name = "conda-lock" %}
 {% set version = "4.0.0" %}
 
 package:
-  name: conda-lock
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/c/conda-lock/conda_lock-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/c/{{ name }}/conda_lock-{{ version }}.tar.gz
   sha256: 050305a490861baa98d6c3876ed7b394707a67587d939548aac5e20b91b41d36
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<39]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
@@ -62,8 +63,24 @@ requirements:
 test:
   imports:
     - conda_lock
+    - conda_lock.click_helpers
+    - conda_lock.common
+    - conda_lock.conda_lock
+    - conda_lock.conda_solver
+    - conda_lock.content_hash
+    - conda_lock.content_hash_types
+    - conda_lock.errors
+    - conda_lock.export_lock_spec
+    - conda_lock.interfaces
+    - conda_lock.invoke_conda
+    - conda_lock.lockfile
+    - conda_lock.lookup
+    - conda_lock.lookup_cache
     - conda_lock.models
+    - conda_lock.pypi_solver
     - conda_lock.src_parser
+    - conda_lock.tempdir_manager
+    - conda_lock.virtual_package
   requires:
     - pip
   commands:
