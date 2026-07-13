@@ -1,20 +1,20 @@
 {% set name = "conda-lock" %}
-{% set version = "4.0.0" %}
+{% set version = "4.0.2" %}
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/c/{{ name }}/conda_lock-{{ version }}.tar.gz
-  sha256: 050305a490861baa98d6c3876ed7b394707a67587d939548aac5e20b91b41d36
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_')}}-{{ version }}.tar.gz
+  sha256: c4ebc4404ea760b1dd0035d6403fa27e291050269a5fd1b629b89fcbc75ef32a
 
 build:
-  number: 1
-  skip: true  # [py<39]
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
     - conda-lock = conda_lock:main
+  skip: true  # [py<310]
 
 requirements:
   host:
@@ -27,6 +27,7 @@ requirements:
     - click >=8.0
     - click-default-group
     - ensureconda >=1.4.7
+    - filelock
     - gitpython >=3.1.30
     - jinja2
     - packaging >=24.0
@@ -44,22 +45,20 @@ requirements:
     - charset-normalizer
     - zstandard >=0.15
     - python-build >=1.2.1,<2.0.0
+    - cachecontrol-with-filecache >=0.14.0,<0.15.0
+    - crashtest >=0.4.1,<0.5.0
     - dulwich >=0.22.6,<0.23.0
     - python-fastjsonschema >=2.18.0,<3.0.0
     - importlib-metadata >=4.4  # [py<310]
-    - python-installer >=0.7.0,<0.8.0
+    - python-installer >=1.0.1,<2.0.0
+    - keyring >=25.1.0,<26.0.0
     - pkginfo >=1.12,<2.0
     - pyproject_hooks >=1.0.0,<2.0.0
     - requests-toolbelt >=1.0.0,<2.0.0
     - shellingham >=1.5,<2.0
     - trove-classifiers >=2022.5.19
-    - xattr >=1.0.0,<2.0.0  # [osx]
-    - cachecontrol-with-filecache >=0.14.0,<0.15.0
-    - crashtest >=0.4.1,<0.5.0
-    - keyring >=25.1.0,<26.0.0
     - virtualenv >=20.26.6,<21.0.0
-    - filelock
-
+    - xattr >=1.0.0,<2.0.0  # [osx]
 test:
   imports:
     - conda_lock
