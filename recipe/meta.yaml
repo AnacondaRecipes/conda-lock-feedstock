@@ -1,5 +1,5 @@
 {% set name = "conda-lock" %}
-{% set version = "4.0.2" %}
+{% set version = "4.0.4" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_')}}-{{ version }}.tar.gz
-  sha256: c4ebc4404ea760b1dd0035d6403fa27e291050269a5fd1b629b89fcbc75ef32a
+  sha256: 90c1111958d756f1bb3480312cb0303d0dab909b04fda4aaaefb352e6621113f
 
 build:
   number: 0
@@ -47,9 +47,8 @@ requirements:
     - python-build >=1.2.1,<2.0.0
     - cachecontrol-with-filecache >=0.14.0,<0.15.0
     - crashtest >=0.4.1,<0.5.0
-    - dulwich >=0.22.6,<0.23.0
+    - dulwich >=0.22.6,<0.25
     - python-fastjsonschema >=2.18.0,<3.0.0
-    - importlib-metadata >=4.4  # [py<310]
     - python-installer >=1.0.1,<2.0.0
     - keyring >=25.1.0,<26.0.0
     - pkginfo >=1.12,<2.0
@@ -85,6 +84,7 @@ test:
   commands:
     - pip check
     - conda-lock --help
+    - python -c "import conda_lock; assert conda_lock.__version__ == '{{ version }}'"
 
 about:
   home: https://github.com/conda/conda-lock
@@ -104,6 +104,11 @@ about:
   dev_url: https://github.com/conda/conda-lock
 
 extra:
+  skip-lints:
+    # conda-lock shells out to the PyPA build stack at runtime (build/installer/
+    # pyproject_hooks/setuptools/virtualenv); pyproject.toml lists all as runtime
+    # deps and pip check enforces them, so they belong in run:, not host:.
+    - python_build_tools_in_host
   recipe-maintainers:
     - mariusvniekerk
     - ocefpaf
