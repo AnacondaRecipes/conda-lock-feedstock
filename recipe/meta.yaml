@@ -37,7 +37,7 @@ requirements:
     - requests >=2.26,<3.0
     - ruamel.yaml
     - semver >=3,<4
-    - setuptools  # analint: python_build_tool_in_run  # declared runtime dep upstream; pip check enforces it
+    - setuptools
     - tomli >=2.0.1,<3.0.0  # [py<311]
     - tomlkit >=0.11.4,<1.0.0
     - typing_extensions >=4.6.1
@@ -104,6 +104,11 @@ about:
   dev_url: https://github.com/conda/conda-lock
 
 extra:
+  skip-lints:
+    # conda-lock shells out to the PyPA build stack at runtime (build/installer/
+    # pyproject_hooks/setuptools/virtualenv); pyproject.toml lists all as runtime
+    # deps and pip check enforces them, so they belong in run:, not host:.
+    - python_build_tools_in_host
   recipe-maintainers:
     - mariusvniekerk
     - ocefpaf
